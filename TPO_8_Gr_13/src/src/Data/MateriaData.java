@@ -118,7 +118,7 @@ public class MateriaData {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "La materia tiene alumnos inscriptos ");
         }
     }
     

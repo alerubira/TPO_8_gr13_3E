@@ -51,38 +51,38 @@ public class Principal {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse a la BD");
         }*/
-        LocalDate l = LocalDate.now();
-        //Alumno a = new Alumno(4,"Pedro", "Suarez", 28967668, l, true);
-        AlumnoData al = new AlumnoData();
-        //al.guardarAlumno(a);
-        //al.eliminarAlumno(4);
-        
-        //Materia m = new Materia(6, "LenguaExtranjera II", true, 2);
-        MateriaData md = new MateriaData();
-        //md.guardarMateria(m);
-        //md.modificarMateria(m);
-        //List<Materia> america = md.listarMaterias();
-        //for (Materia materia : america) {
-        //    System.out.println(materia);
-        //}
-        
-        //Alumno a = al.buscarAlumno(2);
-        //Materia m = md.buscarMateria(7);
-        
-        Inscripcion i = new Inscripcion();
-        InscripcionData id = new InscripcionData();
-        
-          List<Alumno> insc = id.obtenerAlumnosPorMateria(2);
-//        insc = id.obtenerMateriasNoCursadas(2);
-        
-        for (Alumno alumno : insc) {
-            System.out.println(alumno);
-        }
-        
-//        for (Materia inscripcion : insc) {
-//            System.out.println(inscripcion);
+//        LocalDate l = LocalDate.now();
+//        //Alumno a = new Alumno(4,"Pedro", "Suarez", 28967668, l, true);
+//        AlumnoData al = new AlumnoData();
+//        //al.guardarAlumno(a);
+//        //al.eliminarAlumno(4);
+//        
+//        //Materia m = new Materia(6, "LenguaExtranjera II", true, 2);
+//        MateriaData md = new MateriaData();
+//        //md.guardarMateria(m);
+//        //md.modificarMateria(m);
+//        //List<Materia> america = md.listarMaterias();
+//        //for (Materia materia : america) {
+//        //    System.out.println(materia);
+//        //}
+//        
+//        //Alumno a = al.buscarAlumno(2);
+//        //Materia m = md.buscarMateria(7);
+//        
+//        Inscripcion i = new Inscripcion();
+//        InscripcionData id = new InscripcionData();
+//        
+//          List<Alumno> insc = id.obtenerAlumnosPorMateria(2);
+////        insc = id.obtenerMateriasNoCursadas(2);
+//        
+//        for (Alumno alumno : insc) {
+//            System.out.println(alumno);
 //        }
-        
+//        
+////        for (Materia inscripcion : insc) {
+////            System.out.println(inscripcion);
+////        }
+//        
     }
     
 }
