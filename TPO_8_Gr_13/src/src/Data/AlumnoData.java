@@ -37,7 +37,7 @@ public class AlumnoData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 alumno.setId_Alumno(rs.getInt("idAlumno"));
-                JOptionPane.showMessageDialog(null, "Alumno aÃ±adido con exito.");
+                JOptionPane.showMessageDialog(null, "Alumno agregado con exito!","Informacion",JOptionPane.INFORMATION_MESSAGE);
             } 
             ps.close();
             
@@ -48,7 +48,7 @@ public class AlumnoData {
     }
     public Alumno buscarAlumno(int id) {
         Alumno alumno = null;
-        String sql = "SELECT  idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
+        String sql = "SELECT  idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -64,9 +64,8 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                
-
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+             JOptionPane.showMessageDialog(null, "No existe el alumno", "Error!", JOptionPane.ERROR_MESSAGE);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -167,7 +166,7 @@ public class AlumnoData {
             ps.setInt(1, id);   //Para setear el id donde esta el signo ?
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Borrado Exitosamente.");
+                JOptionPane.showMessageDialog(null, "Alumno Borrado Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "El alumno no existe");
             }

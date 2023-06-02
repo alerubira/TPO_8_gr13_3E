@@ -71,7 +71,7 @@ public class MateriaData {
                 
  
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la materia");
+                JOptionPane.showMessageDialog(null, "No existe la materia", "Error!", JOptionPane.ERROR_MESSAGE);
             }
             ps.close();
         } catch (SQLException ex) {

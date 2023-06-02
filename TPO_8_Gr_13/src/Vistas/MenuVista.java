@@ -16,6 +16,8 @@ public class MenuVista extends javax.swing.JFrame {
      */
     public MenuVista() {
         initComponents();
+        setLocationRelativeTo(null);
+        setSize(600, 600);
     }
 
     /**
@@ -94,6 +96,11 @@ public class MenuVista extends javax.swing.JFrame {
         jMenu7.setText("Inscripciones");
 
         jMenuItem4.setText("Manejo de Inscripcion");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem4);
 
         jMenuBar1.add(jMenu7);
@@ -101,11 +108,16 @@ public class MenuVista extends javax.swing.JFrame {
         jMenu8.setText("Carga de Notas");
 
         jMenuItem5.setText("Manipulacion de Notas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu8.add(jMenuItem5);
 
         jMenuBar1.add(jMenu8);
 
-        jMenu9.setText("consultas");
+        jMenu9.setText("Consultas");
 
         jMenuItem6.setText("Listado de Alumno x Materia");
         jMenu9.add(jMenuItem6);
@@ -135,7 +147,7 @@ public class MenuVista extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        FormularioMatariasVista vbc = new FormularioMatariasVista();
+        FormularioMateriasVista vbc = new FormularioMateriasVista();
         vbc.setVisible(true);
         escritorio.add(vbc);
         escritorio.moveToFront(vbc);
@@ -149,6 +161,24 @@ public class MenuVista extends javax.swing.JFrame {
         escritorio.add(vbc);
         escritorio.moveToFront(vbc);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioInscripcionVista vfi = new FormularioInscripcionVista();
+        vfi.setVisible(true);
+        escritorio.add(vfi);
+        escritorio.moveToFront(vfi);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ManipulacionNotasVista mnv = new ManipulacionNotasVista();
+        mnv.setVisible(true);
+        escritorio.add(mnv);
+        escritorio.moveToFront(mnv);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
