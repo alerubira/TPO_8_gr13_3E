@@ -74,10 +74,17 @@ public class FormularioAlumnosVista extends javax.swing.JInternalFrame {
         });
 
         jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.setEnabled(false);
 
         jbBorrar.setText("Borrar");
+        jbBorrar.setEnabled(false);
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBorrarActionPerformed(evt);
@@ -207,11 +214,14 @@ public class FormularioAlumnosVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        
         if (jtxtLegajo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Campo Legajo VACIO!!", "Advertencia!", JOptionPane.WARNING_MESSAGE);
             jtxtLegajo.requestFocus();
         } else {
             try {
+                jbBorrar.setEnabled(true);
+                jbActualizar.setEnabled(true);
                 AlumnoData alumnoData = new AlumnoData();
                 Alumno alumno = new Alumno();
                 int id = Integer.parseInt(jtxtLegajo.getText());
@@ -299,6 +309,12 @@ public class FormularioAlumnosVista extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        limpiar();
+        jbBorrar.setEnabled(false);
+        jbActualizar.setEnabled(false);
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void limpiar() {
         jtxtLegajo.setText("");

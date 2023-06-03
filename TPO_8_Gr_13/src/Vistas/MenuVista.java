@@ -120,6 +120,11 @@ public class MenuVista extends javax.swing.JFrame {
         jMenu9.setText("Consultas");
 
         jMenuItem6.setText("Listado de Alumno x Materia");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem6);
 
         jMenuBar1.add(jMenu9);
@@ -179,6 +184,15 @@ public class MenuVista extends javax.swing.JFrame {
         escritorio.add(mnv);
         escritorio.moveToFront(mnv);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        AlumnosPorMateriaVistas mnv = new AlumnosPorMateriaVistas();
+        mnv.setVisible(true);
+        escritorio.add(mnv);
+        escritorio.moveToFront(mnv);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

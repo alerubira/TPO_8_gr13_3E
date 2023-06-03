@@ -31,6 +31,27 @@ public class InscripcionData {
         con = ConeccionData.getConexion();
     }
     
+    public Double pedirNota(int idmateria, int idalumno){
+        Double nota=0.0;
+        
+        try {
+            String sql = "SELECT nota FROM inscripcion WHERE idMateria = ? AND idAlumno = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idmateria);
+            ps.setInt(2, idalumno);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+            nota = rs.getDouble("nota");
+            }
+            ps.close();
+            
+      
+        } catch (Exception e) { 
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion" + e.getMessage());
+        }
+        return nota;
+    }
+    
     public void guardarInscripcion(Inscripcion inscripcion){
         String sql = "INSERT INTO inscripcion (idmateria, idalumno, nota) VALUES (?, ?, 0)";
         try {

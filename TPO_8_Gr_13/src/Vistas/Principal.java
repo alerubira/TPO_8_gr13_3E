@@ -69,8 +69,7 @@ public class Principal {
 //        //Alumno a = al.buscarAlumno(2);
 //        //Materia m = md.buscarMateria(7);
 //        
-//        Inscripcion i = new Inscripcion();
-//        InscripcionData id = new InscripcionData();
+        // InscripcionData id = new InscripcionData();
 //        
 //          List<Alumno> insc = id.obtenerAlumnosPorMateria(2);
 ////        insc = id.obtenerMateriasNoCursadas(2);
@@ -82,6 +81,7 @@ public class Principal {
 ////        for (Materia inscripcion : insc) {
 ////            System.out.println(inscripcion);
 ////        }
+//System.out.println(id.pedirNota(3, 2));
 //        
     }
     

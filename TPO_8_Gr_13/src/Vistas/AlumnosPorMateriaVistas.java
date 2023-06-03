@@ -5,19 +5,61 @@
  */
 package Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import src.Data.AlumnoData;
+import src.Data.InscripcionData;
+import src.Data.MateriaData;
+import src.Entidades.Alumno;
+import src.Entidades.Inscripcion;
+import src.Entidades.Materia;
+
 /**
  *
  * @author EQUIPO
  */
 public class AlumnosPorMateriaVistas extends javax.swing.JInternalFrame {
 
+    private InscripcionData insData=new InscripcionData();
+    private AlumnoData aluData=new AlumnoData();
+    private MateriaData matData = new MateriaData();
+    private DefaultTableModel modelo=new DefaultTableModel();
+    
     /**
      * Creates new form AlumnosPorMateriaVistas
      */
     public AlumnosPorMateriaVistas() {
         initComponents();
+        modelo = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return !(column == 0 || column == 1 || column == 2);
+            }
+        };
+        cargaMaterias();
+        armarCabecera();
     }
 
+    private void cargaMaterias() {
+        List<Materia> materias = matData.listarMaterias();
+        for (Materia mat : materias) {
+            jcomboMateria.addItem(mat);
+        }
+    }
+    
+    private void armarCabecera() {
+        ArrayList titulos=new ArrayList();
+        titulos.add("ID");
+        titulos.add("Nombre");
+        titulos.add("Nota");
+        for(Object titulo:titulos){
+            modelo.addColumn(titulo);
+        }
+        jtAlumno.setModel(modelo);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,26 +71,53 @@ public class AlumnosPorMateriaVistas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcomboMateria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtAlumno = new javax.swing.JTable();
+        jbSalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("LISTADO DE ALUMNOS POR MATERIA");
 
         jLabel2.setText("MATERIA");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcomboMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcomboMateriaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "ID", "Nombre", "Nota"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtAlumno);
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,15 +129,20 @@ public class AlumnosPorMateriaVistas extends javax.swing.JInternalFrame {
                         .addGap(115, 115, 115)
                         .addComponent(jLabel2)
                         .addGap(70, 70, 70)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcomboMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(69, 69, 69))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbSalir)
+                        .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,21 +152,49 @@ public class AlumnosPorMateriaVistas extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcomboMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbSalir)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcomboMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcomboMateriaActionPerformed
+        borrarFilas();
+        llenarTabla();
+    }//GEN-LAST:event_jcomboMateriaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+    private void llenarTabla(){
+            Materia materiaSeleccionado=(Materia)jcomboMateria.getSelectedItem();
+            Materia m = (Materia) jcomboMateria.getSelectedItem();
+            List<Alumno> alumnos = insData.obtenerAlumnosPorMateria(m.getId_Materia());
+                   
+            for(Alumno al: alumnos){
+                modelo.addRow(new Object[]{al.getId_Alumno(),al.getNombre(),insData.pedirNota(m.getId_Materia(), al.getId_Alumno())});
+            }
+    }
+    private void borrarFilas(){
+
+    int filas=modelo.getRowCount()-1;
+    for(int i=filas;i>=0;i--){
+    
+        modelo.removeRow(i);
+    }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Materia> jcomboMateria;
+    private javax.swing.JTable jtAlumno;
     // End of variables declaration//GEN-END:variables
 }
